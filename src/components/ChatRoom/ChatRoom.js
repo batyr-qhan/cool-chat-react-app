@@ -1,5 +1,12 @@
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
-import { db, getMessages } from "../../services/firebase";
+import {
+  memo,
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
+import { db, getMessages, sendMessage } from "../../services/firebase";
 
 import "./styles.css";
 
@@ -31,25 +38,25 @@ export default function ChatRoom({ user, changeName }) {
     return unsubscribe;
   }, []);
 
-  const sendMessage = (e) => {
+  const handleSendMessage = (e) => {
     e.preventDefault();
 
-    console.log(user);
+    sendMessage(formValue, user, setFormValue);
 
-    addDoc(collection(db, "messages"), {
-      uid: user.uid,
-      displayName: user.name,
-      text: formValue.trim(),
-      timestamp: serverTimestamp(),
-      profileColor: user?.profileColor,
-    })
-      .then((res) => {
-        console.log(res);
-        setFormValue("");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    // addDoc(collection(db, "messages"), {
+    //   uid: user.uid,
+    //   displayName: user.name,
+    //   text: formValue.trim(),
+    //   timestamp: serverTimestamp(),
+    //   profileColor: user?.profileColor,
+    // })
+    //   .then((res) => {
+    //     console.log(res);
+    //     setFormValue("");
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
   };
 
   return (
@@ -61,7 +68,7 @@ export default function ChatRoom({ user, changeName }) {
       <section className="messages-container" ref={containerRef}>
         {messages &&
           messages.map((msg) => (
-            <ChatMessage
+            <MemoizedChatMessage
               key={msg.id}
               message={msg}
               isOwnMessage={msg.uid === user.uid}
@@ -72,7 +79,7 @@ export default function ChatRoom({ user, changeName }) {
         {/* <span ref={dummy}></span> */}
       </section>
 
-      <form onSubmit={sendMessage} className="input-field-wrapper">
+      <form onSubmit={handleSendMessage} className="input-field-wrapper">
         <input
           value={formValue}
           onChange={(e) => setFormValue(e.target.value)}
@@ -91,6 +98,8 @@ export default function ChatRoom({ user, changeName }) {
     </div>
   );
 }
+
+const MemoizedChatMessage = memo(ChatMessage);
 
 function ChatMessage({ isOwnMessage, message, userName }) {
   const { text, uuid, photoURL } = message;

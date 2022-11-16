@@ -56,7 +56,10 @@ function App() {
           ) : (
             <div className="set-name-input-container">
               <form onSubmit={handleSubmit}>
+                <label htmlFor="set-user-name" />
                 <input
+                  id="set-user-name"
+                  type="text"
                   value={userName}
                   onChange={(e) => setUserName(e.target.value)}
                 />

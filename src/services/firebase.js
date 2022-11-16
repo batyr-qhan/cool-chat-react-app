@@ -7,6 +7,8 @@ import {
   query,
   orderBy,
   addDoc,
+  limit,
+  limitToLast,
 } from "firebase/firestore";
 
 import { getAuth } from "firebase/auth";
@@ -31,29 +33,31 @@ export const db = getFirestore(app);
 
 export function getMessages(callback) {
   return onSnapshot(
-    query(collection(db, "messages"), orderBy("timestamp", "asc")),
+    query(collection(db, "messages"), orderBy("timestamp", "asc"), limitToLast(30)),
     (querySnapshot) => {
       const messages = querySnapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
       }));
-      console.log("its mess", messages);
       callback(messages);
     }
   );
 }
 
-// export async function sendMessage(text) {
-//   try {
-//     await addDoc(collection(db, "messages"), {
-//       // uid: user.uid,
-//       // displayName: user.displayName,
-//       text: text.trim(),
-//       timestamp: serverTimestamp(),
-//     });
-//   } catch (error) {
-//     console.error(error);
-//   }
-// }
+export function sendMessage(text, user, callback) {
+  addDoc(collection(db, "messages"), {
+    uid: user.uid,
+    displayName: user.name,
+    text: text.trim(),
+    timestamp: serverTimestamp(),
+    profileColor: user?.profileColor,
+  })
+    .then((res) => {
+      callback("");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}
 
 export default app;
