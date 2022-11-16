@@ -36,3 +36,32 @@
     transform: rotate(360deg);
   }
 }
+
+.set-name-input-container {
+  width: 500px;
+}
+
+.set-name-input-container form {
+  display: flex;
+  height: 60px;
+}
+.set-name-input-container form input {
+  flex-grow: 1;
+  border: none;
+  outline: none;
+  padding: 0 20px;
+  font-size: 1.2rem;
+}
+.set-name-input-container form button {
+  width: 20%;
+  border: none;
+  outline: none;
+  background-color: var(--secondary-color);
+  color: var(--font-color-default);
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.set-name-input-container form .disabled {
+  opacity: 0.5;
+}
