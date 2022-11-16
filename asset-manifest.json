@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/cool-chat-react-app/static/css/main.b283de4f.css",
-    "main.js": "/cool-chat-react-app/static/js/main.02de5d78.js",
+    "main.css": "/cool-chat-react-app/static/css/main.c8c28e64.css",
+    "main.js": "/cool-chat-react-app/static/js/main.93943fd0.js",
     "static/js/787.f09152f8.chunk.js": "/cool-chat-react-app/static/js/787.f09152f8.chunk.js",
     "index.html": "/cool-chat-react-app/index.html",
-    "main.b283de4f.css.map": "/cool-chat-react-app/static/css/main.b283de4f.css.map",
-    "main.02de5d78.js.map": "/cool-chat-react-app/static/js/main.02de5d78.js.map",
+    "main.c8c28e64.css.map": "/cool-chat-react-app/static/css/main.c8c28e64.css.map",
+    "main.93943fd0.js.map": "/cool-chat-react-app/static/js/main.93943fd0.js.map",
     "787.f09152f8.chunk.js.map": "/cool-chat-react-app/static/js/787.f09152f8.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.b283de4f.css",
-    "static/js/main.02de5d78.js"
+    "static/css/main.c8c28e64.css",
+    "static/js/main.93943fd0.js"
   ]
 }
