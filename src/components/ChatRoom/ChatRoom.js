@@ -90,9 +90,11 @@ export default function ChatRoom({ user, changeName }) {
         <button
           type="submit"
           disabled={!formValue}
-          className="input-field-wrapper__button"
+          className={`input-field-wrapper__button ${
+            !formValue && "disabledBtn"
+          }`}
         >
-          🕊️
+          <span>🕊️</span>
         </button>
       </form>
     </div>
