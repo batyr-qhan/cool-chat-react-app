@@ -40,7 +40,6 @@
 @media only screen and (max-width: 600px) {
   .set-name-input-container {
     min-width: 100%;
-    background-color: #61dafb;
     width: auto;
   }
 }
@@ -49,6 +48,10 @@
   .set-name-input-container {
     width: 500px;
   }
+}
+
+.set-name-input-container__title {
+  margin-bottom: 10px;
 }
 
 .set-name-input-container form {

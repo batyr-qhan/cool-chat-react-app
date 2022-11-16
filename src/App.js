@@ -54,6 +54,9 @@ function App() {
             <ChatRoom auth={auth} user={user} changeName={handleChangeName} />
           ) : (
             <div className="set-name-input-container">
+              <div className="set-name-input-container__title">
+                Tell me your name, or maybe your friend's name, or... whatever =)
+              </div>
               <form onSubmit={handleSubmit}>
                 <label htmlFor="set-user-name" />
                 <input
