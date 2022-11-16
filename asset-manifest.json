@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/cool-chat-react-app/static/css/main.a75b1bea.css",
-    "main.js": "/cool-chat-react-app/static/js/main.b49e691f.js",
+    "main.js": "/cool-chat-react-app/static/js/main.d7f8f64a.js",
     "static/js/787.f09152f8.chunk.js": "/cool-chat-react-app/static/js/787.f09152f8.chunk.js",
     "index.html": "/cool-chat-react-app/index.html",
     "main.a75b1bea.css.map": "/cool-chat-react-app/static/css/main.a75b1bea.css.map",
-    "main.b49e691f.js.map": "/cool-chat-react-app/static/js/main.b49e691f.js.map",
+    "main.d7f8f64a.js.map": "/cool-chat-react-app/static/js/main.d7f8f64a.js.map",
     "787.f09152f8.chunk.js.map": "/cool-chat-react-app/static/js/787.f09152f8.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.a75b1bea.css",
-    "static/js/main.b49e691f.js"
+    "static/js/main.d7f8f64a.js"
   ]
 }
