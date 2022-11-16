@@ -37,7 +37,6 @@ function App() {
     const user = JSON.parse(localStorage.getItem("cool-chat-temp-user"));
 
     if (user) {
-      console.log(user);
       setUser(user);
     }
   }, []);
