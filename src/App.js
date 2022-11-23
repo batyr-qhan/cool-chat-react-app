@@ -75,7 +75,7 @@ function UnauthenticatedApp() {
     <div className="app-container">
       <h2>Log in to join a chat room!</h2>
       <button onClick={login} className="app-container__login">
-        <FaGoogle style={{ marginRight: 10 }} />
+        <FaGoogle color="#282c34" style={{ marginRight: 10 }} />
         Login with Google
       </button>
     </div>
