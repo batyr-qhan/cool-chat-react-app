@@ -11,7 +11,12 @@ import {
   limitToLast,
 } from "firebase/firestore";
 
-import { getAuth } from "firebase/auth";
+import {
+  getAuth,
+  GoogleAuthProvider,
+  signInWithPopup,
+  signOut,
+} from "firebase/auth";
 
 // import "firebase/firestore";
 // import "firebase/auth";
@@ -33,7 +38,11 @@ export const db = getFirestore(app);
 
 export function getMessages(callback) {
   return onSnapshot(
-    query(collection(db, "messages"), orderBy("timestamp", "asc"), limitToLast(30)),
+    query(
+      collection(db, "messages"),
+      orderBy("timestamp", "asc"),
+      limitToLast(30)
+    ),
     (querySnapshot) => {
       const messages = querySnapshot.docs.map((doc) => ({
         id: doc.id,
@@ -59,5 +68,28 @@ export function sendMessage(text, user, callback) {
       console.log(err);
     });
 }
+
+export async function loginWithGoogle() {
+  try {
+    const provider = new GoogleAuthProvider();
+    const auth = getAuth();
+
+    const { user } = await signInWithPopup(auth, provider);
+
+    return { uid: user.uid, displayName: user.displayName };
+  } catch (error) {
+    if (error.code !== "auth/cancelled-popup-request") {
+      console.error(error);
+    }
+
+    return null;
+  }
+}
+
+// export function handleLogout() {
+//   try {
+//     signOut()
+//   }
+// }
 
 export default app;

@@ -5,75 +5,61 @@ import ChatRoom from "./components/ChatRoom/ChatRoom";
 
 import { auth } from "./services/firebase";
 import { v4 as uuid } from "uuid";
+import { useAuth } from "./hooks/useAuth";
+import { FaGoogle } from "react-icons/fa";
 
 function App() {
-  const [user, setUser] = useState(null);
+  const { user } = useAuth();
 
-  const [userName, setUserName] = useState("");
+  console.log(user);
 
-  const userProfileColors = [
-    "#F49D1A",
-    "#432C7A",
-    "#395144",
-    "#EA047E",
-    "#2192FF",
-    "#F96666",
-  ];
+  // const [user, setUser] = useState(null);
 
-  const handleSubmit = () => {
-    const userData = {
-      name: userName,
-      uid: uuid(),
-      profileColor:
-        userProfileColors[Math.floor(Math.random() * userProfileColors.length)],
-    };
+  // const [userName, setUserName] = useState("");
 
-    setUser(userData);
-    localStorage.setItem("cool-chat-temp-user", JSON.stringify(userData));
-    setUserName("");
-  };
+  // const userProfileColors = [
+  //   "#F49D1A",
+  //   "#432C7A",
+  //   "#395144",
+  //   "#EA047E",
+  //   "#2192FF",
+  //   "#F96666",
+  // ];
 
-  useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("cool-chat-temp-user"));
+  // const handleSubmit = () => {
+  //   const userData = {
+  //     name: userName,
+  //     uid: uuid(),
+  //     profileColor:
+  //       userProfileColors[Math.floor(Math.random() * userProfileColors.length)],
+  //   };
 
-    if (user) {
-      setUser(user);
-    }
-  }, []);
+  //   setUser(userData);
+  //   localStorage.setItem("cool-chat-temp-user", JSON.stringify(userData));
+  //   setUserName("");
+  // };
 
-  const handleChangeName = () => {
-    localStorage.removeItem("cool-chat-temp-user");
-    setUser(null);
-  };
+  // useEffect(() => {
+  //   const user = JSON.parse(localStorage.getItem("cool-chat-temp-user"));
+
+  //   if (user) {
+  //     setUser(user);
+  //   }
+  // }, []);
+
+  // const handleChangeName = () => {
+  //   localStorage.removeItem("cool-chat-temp-user");
+  //   setUser(null);
+  // };
 
   return (
     <div className="App">
       <header className="App-header">
         <>
           {user ? (
-            <ChatRoom auth={auth} user={user} changeName={handleChangeName} />
+            <ChatRoom auth={auth} user={user} changeName={() => {}} />
           ) : (
-            <div className="set-name-input-container">
-              <div className="set-name-input-container__title">
-                Tell me your name, or maybe your friend's name, or... whatever =)
-              </div>
-              <form onSubmit={handleSubmit}>
-                <label htmlFor="set-user-name" />
-                <input
-                  id="set-user-name"
-                  type="text"
-                  value={userName}
-                  onChange={(e) => setUserName(e.target.value)}
-                />
-                <button
-                  disabled={!userName}
-                  className={`${!userName && "disabled"}`}
-                  type="submit"
-                >
-                  start 💬
-                </button>
-              </form>
-            </div>
+            <UnauthenticatedApp />
           )}
         </>
       </header>
@@ -83,17 +69,15 @@ function App() {
 
 export default App;
 
-// function SignIn() {
-//   signInAnonymously(auth)
-//     .then(() => {
-//       // Signed in..
-//     })
-//     .catch((error) => {
-//       const errorCode = error.code;
-//       const errorMessage = error.message;
-//       console.log(errorCode, errorMessage);
-//       // ...
-//     });
-
-//   return <button onClick={signInAnonymously}>Sign in with Google</button>;
-// }
+function UnauthenticatedApp() {
+  const { login } = useAuth();
+  return (
+    <div className="app-container">
+      <h2>Log in to join a chat room!</h2>
+      <button onClick={login} className="app-container__login">
+        <FaGoogle style={{ marginRight: 10 }} />
+        Login with Google
+      </button>
+    </div>
+  );
+}

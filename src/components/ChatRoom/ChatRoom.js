@@ -20,12 +20,16 @@ import {
   orderBy,
   onSnapshot,
 } from "firebase/firestore";
+import { signOut } from "firebase/auth";
+import { useAuth } from "../../hooks/useAuth";
 
 export default function ChatRoom({ user, changeName }) {
   const [messages, setMessages] = useState([]);
   const [formValue, setFormValue] = useState("");
 
   const containerRef = useRef(null);
+
+  const { logout } = useAuth();
 
   useLayoutEffect(() => {
     if (containerRef.current) {
@@ -41,29 +45,29 @@ export default function ChatRoom({ user, changeName }) {
   const handleSendMessage = (e) => {
     e.preventDefault();
 
-    sendMessage(formValue, user, setFormValue);
+    // sendMessage(formValue, user, setFormValue);
 
-    // addDoc(collection(db, "messages"), {
-    //   uid: user.uid,
-    //   displayName: user.name,
-    //   text: formValue.trim(),
-    //   timestamp: serverTimestamp(),
-    //   profileColor: user?.profileColor,
-    // })
-    //   .then((res) => {
-    //     console.log(res);
-    //     setFormValue("");
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
+    addDoc(collection(db, "messages"), {
+      uid: user.uid,
+      displayName: user.displayName,
+      text: formValue.trim(),
+      timestamp: serverTimestamp(),
+      // profileColor: user?.profileColor,
+    })
+      .then((res) => {
+        console.log(res);
+        setFormValue("");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
     <div className="chat-room-container">
       <section className="messages-header">
         <div>welcome to 🔥 chat</div>
-        <button onClick={changeName}>Change Name</button>
+        <button onClick={logout}>Logout</button>
       </section>
       <section className="messages-container" ref={containerRef}>
         {messages &&

@@ -50,6 +50,28 @@
   }
 }
 
+.app-container h2 {
+  margin-bottom: 20px;
+}
+
+.app-container__login {
+  padding: 10px 20px;
+  /* text-align: center; */
+  display: flex;
+  align-items: center;
+  margin: 0 auto;
+  outline: none;
+  border: none;
+  transition: transform 0.1s ease-in-out;
+}
+
+.app-container__login:hover {
+  transform: scale(1.1);
+}
+.app-container__login:active {
+  transform: scale(0.9);
+}
+
 .set-name-input-container__title {
   margin-bottom: 10px;
 }
